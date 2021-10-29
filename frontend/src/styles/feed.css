@@ -1,0 +1,18 @@
+.feed {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.posts-container {
+  height: 100%;
+  width: 70%;
+  padding: 1.5vw 0;
+  border-left: solid 1px;
+  border-right: solid 1px;
+  display: flex;  
+  align-items: center;
+  overflow-y: auto;
+  flex-direction: column;
+}

@@ -1,0 +1,18 @@
+{
+  "name": "nearbook",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean:contract": "cd contract && yarn clean",
+    "build:contract": "cd contract && yarn build",
+    "test:contract": "cd contract && yarn test",
+    "test:frontend": "echo \"Error: no test specified\" && exit 1",
+    "dev:deploy:contract": "cd contract && yarn dev:deploy",
+    "start:dev:contract": "npm run dev:deploy:contract",
+    "start:frontend": "cd frontend && npm run start",
+    "start:app": "npm run start:dev:contract && npm run start:frontent"
+  },
+  "author": "Jose Gabriel",
+  "license": "ISC"
+}

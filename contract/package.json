@@ -1,0 +1,17 @@
+{
+  "name": "nearbook-contract",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "asp",
+    "clean": "sh scripts/clean.sh",
+    "build": "sh scripts/build.sh",
+    "dev:deploy": "sh scripts/dev-deploy.sh"
+  },
+  "author": "Jose Gabriel",
+  "license": "MIT",
+  "devDependencies": {
+    "near-sdk-as": "^3.2.3"
+  }
+}

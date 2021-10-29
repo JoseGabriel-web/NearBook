@@ -1,0 +1,11 @@
+{
+    "name": "dev-1635485111873-86596049507383",
+    "methods": {
+        "greet": "greet",
+        "listPosts": "listPosts",
+        "createPost": "createPost",
+        "getMyPosts": "getMyPosts",
+        "handlePostLike": "handlePostLike",
+        "removePost": "removePost"
+    }
+}
