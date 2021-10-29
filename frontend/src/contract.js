@@ -56,6 +56,32 @@ export const getMyPosts = async (wallet) => {
   return decode(result);
 };
 
+export const addComment = async (wallet, { postID, label }) => {
+  const functionConfig = {
+    contractId: contractInfo.name,
+    methodName: contractInfo.methods.addComment,
+    args: {
+      postID,
+      label
+    },
+  };
+  const result = await wallet.account().functionCall(functionConfig);
+  return decode(result);
+};
+
+export const removeComment = async (wallet, { postID, commentID }) => {
+  const functionConfig = {
+    contractId: contractInfo.name,
+    methodName: contractInfo.methods.removeComment,
+    args: {
+      postID,
+      commentID
+    },
+  };
+  const result = await wallet.account().functionCall(functionConfig);
+  return decode(result);
+};
+
 export const removePost = async (wallet, { postID }) => {
   const functionConfig = {
     contractId: contractInfo.name,

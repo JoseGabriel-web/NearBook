@@ -1,7 +1,8 @@
 import Post from "./models/Post";
 import { PersistentVector, Context } from "near-sdk-as";
+import Comment from "./models/Comment";
 
-const postssss = new PersistentVector<Post>("c");
+const postssssss = new PersistentVector<Post>("d");
 
 export function greet(): string {
   return "Hello world";
@@ -9,30 +10,30 @@ export function greet(): string {
 
 export function createPost(title: string, description: string): string {
   const newPost = new Post(Context.sender, title, description);
-  postssss.push(newPost);
+  postssssss.push(newPost);
   return "Post created succesfully";
 }
 
 export function listPosts(): Post[] {
-  const listPosts = new Array<Post>(postssss.length);
-  for (let i = 0; i < postssss.length; i++) {
-    listPosts[i] = postssss[i];
+  const listPosts = new Array<Post>(postssssss.length);
+  for (let i = 0; i < postssssss.length; i++) {
+    listPosts[i] = postssssss[i];
   }
   return listPosts;
 }
 
 export function getMyPosts(): Post[] {
   let userPostsQuantity = 0;
-  for (let i = 0; i < postssss.length; i++) {
-    if (postssss[i].creator === Context.sender) {
+  for (let i = 0; i < postssssss.length; i++) {
+    if (postssssss[i].creator === Context.sender) {
       userPostsQuantity += 1;
     }
   }
 
   let userPosts = new Array<Post>(userPostsQuantity);
-  for (let i = 0; i < postssss.length; i++) {
-    if (postssss[i].creator == Context.sender) {
-      userPosts.push(postssss[i]);
+  for (let i = 0; i < postssssss.length; i++) {
+    if (postssssss[i].creator == Context.sender) {
+      userPosts.push(postssssss[i]);
     }
   }
 
@@ -40,10 +41,10 @@ export function getMyPosts(): Post[] {
 }
 
 function findPostIndex(postID: string): number {
-  const listPosts = new Array<Post>(postssss.length);
+  const listPosts = new Array<Post>(postssssss.length);
   let index: number = -1;
-  for (let i = 0; i < postssss.length; i++) {
-    if (postssss[i].id == postID) {
+  for (let i = 0; i < postssssss.length; i++) {
+    if (postssssss[i].id == postID) {
       index = i;
     }
   }
@@ -51,7 +52,7 @@ function findPostIndex(postID: string): number {
 }
 
 function findPost(postID: string): Post {
-  let post = postssss[<i32>findPostIndex(postID)];
+  let post = postssssss[<i32>findPostIndex(postID)];
   return post;
 }
 
@@ -63,19 +64,43 @@ export function handlePostLike(postID: string): void {
   } else {
     currentPost.likes.push(Context.sender);
   }
-  postssss.replace(<i32>findPostIndex(postID), currentPost);
+  postssssss.replace(<i32>findPostIndex(postID), currentPost);
   return;
 }
 
 export function removePost(postID: string): string {
   const postIndex = findPostIndex(postID);
 
-  if (!postssss.containsIndex(<i32>postIndex)) {
+  if (!postssssss.containsIndex(<i32>postIndex)) {
     return "Post not found";
   }
-  if (postssss[<i32>postIndex].creator != Context.sender) {
+  if (postssssss[<i32>postIndex].creator != Context.sender) {
     return "Post can only be removed by creator.";
   }
-  postssss.swap_remove(<i32>postIndex);
+  postssssss.swap_remove(<i32>postIndex);
   return "Post removed";
+}
+
+// Comments
+
+export function createComment(label: string, postID: string): string {
+  const newComment = new Comment(Context.sender, label);
+  const postIndex = findPostIndex(postID);
+  let post = findPost(postID);
+  post.comments.push(newComment);
+  postssssss.replace(<i32>postIndex, post);
+  return "Comment created succesfully";
+}
+export function removeComment(postID: string, commentID: string): string {
+  const postIndex = findPostIndex(postID);
+  let post = findPost(postID);
+  let commentIndex = -1;
+  for (let i = 0; i < post.comments.length; i++) {
+    if (post.comments[i].commentID == commentID) {
+      commentIndex = i;
+    }
+  }
+  post.comments.splice(commentIndex, 1);
+  postssssss.replace(<i32>postIndex, post);
+  return "Comment deleted succesfully";
 }

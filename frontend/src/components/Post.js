@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "../styles/post.css";
 import Liked from "../assets/Liked";
 import Unliked from "../assets/Unliked";
 import Trash from "../assets/Trash";
-import { handlePostLike, removePost } from "../contract";
+import { addComment, handlePostLike, removePost } from "../contract";
+import CommentIcon from "../assets/CommentIcon";
+import Comment from "./Comment";
 
 const Post = ({
   accountID,
@@ -12,11 +14,23 @@ const Post = ({
   title,
   description,
   likes,
+  comments,
   wallet,
-}) => {
+}) => {  
+  const [setCommentLabel, commentLabel] = useState("");
+
+  const handleAddComment = async () => {
+    if (commentLabel.length > 0) {
+      try {
+        await addComment(wallet, { postID: id, label: commentLabel });
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  };
 
   const handleLike = async () => {
-    console.log(id)
+    console.log(id);
     try {
       await handlePostLike(wallet, { postID: id });
     } catch (err) {
@@ -25,7 +39,7 @@ const Post = ({
   };
 
   const handleRemovePost = async () => {
-    console.log(id)
+    console.log(id);
     try {
       await removePost(wallet, { postID: id });
     } catch (err) {
@@ -34,31 +48,74 @@ const Post = ({
   };
 
   return (
-    <div className="post-container" key={id}>
-      <div className="post-header">
-        <div className="post-header-avatar">
-          {creator.split("")[0].toUpperCase()}
-        </div>
-        <div className="post-header-creator-name">{creator}</div>
-        {accountID === creator && (
-          <div
-            className="post-header-delete-btn"
-            onClick={() => handleRemovePost()}
-          >
-            <Trash />
+    <div className="post-wrapper">
+      <div className="post-container" key={id}>
+        <div className="post-header">
+          <div className="post-header-avatar">
+            {creator.split("")[0].toUpperCase()}
           </div>
-        )}
-      </div>
-      <div className="post-content">
-        <h4>{title}</h4>
-        <p>{description}</p>
-      </div>
-      <div className="post-footer">
-        <div title={likes.join(', ')} className="post-footer-like-emoji" onClick={() => handleLike()}>
-          {likes.includes(accountID) ? <Liked tooltip={likes} /> : <Unliked tooltip={likes} />}
+          <div className="post-header-creator-name">{creator}</div>
+          {accountID === creator && (
+            <div
+              className="post-header-delete-btn"
+              onClick={() => handleRemovePost()}
+            >
+              <Trash />
+            </div>
+          )}
         </div>
-        <div className="post-footer-like-quantity">{likes.length}</div>
-        
+        <div className="post-content">
+          <h4>{title}</h4>
+          <p>{description}</p>
+        </div>
+        <div className="post-footer">
+          <div
+            title={likes.join(", ")}
+            className="post-footer-like-emoji"
+            onClick={() => handleLike()}
+          >
+            {likes.includes(accountID) ? (
+              <Liked tooltip={likes} />
+            ) : (
+              <Unliked tooltip={likes} />
+            )}
+          </div>
+          <div className="post-footer-like-quantity">{likes.length}</div>
+          <div className="spacer" />
+          <div className="post-footer-comments-emoji-and-quantity">
+            <div className="post-footer-comments-quantity">
+              {comments && comments.length}
+            </div>
+            <CommentIcon />
+          </div>
+        </div>
+      </div>
+      <div className="comment-input-wrapper">
+        <input
+          type="text"
+          placeholder="Add a comment"
+          onChange={(e) => setCommentLabel(e.target.value)}
+          value={commentLabel}
+        />
+        <div className="comment-add-button" onClick={() => handleAddComment()}>
+          +
+        </div>
+      </div>
+      <div
+        data-has-comments={comments.length > 0}
+        className="post-comments-section"
+      >
+        {comments.length > 0 &&
+          comments.map(({ commentID, creator, label }) => (
+            <Comment
+              wallet={wallet}
+              accountID={accountID}
+              id={commentID}
+              creator={creator}
+              label={label}
+              postID={id}
+            />
+          ))}
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 {
   "name": "nearbook",
   "version": "0.0.1",
-  "description": "",
+  "description": "La idea de nuestro proyecto es el de conectar a la comunidad Near en su propio social media, nuestro contrato permite crear articulos, darle like, quitar el like, conseguir los articulos creados, eliminar articulos creados estas son algunas de las funcionalidades, si tuvieramos mas tiempo agregariamos poder comentar que es posible que sea añadido para la presentacion.",
   "main": "index.js",
   "scripts": {
     "clean:contract": "cd contract && yarn clean",
@@ -11,7 +11,7 @@
     "dev:deploy:contract": "cd contract && yarn dev:deploy",
     "start:dev:contract": "npm run dev:deploy:contract",
     "start:frontend": "cd frontend && npm run start",
-    "start:app": "npm run start:dev:contract && npm run start:frontent"
+    "start:app": "npm run start:dev:contract && npm run start:frontend"
   },
   "author": "Jose Gabriel",
   "license": "ISC"

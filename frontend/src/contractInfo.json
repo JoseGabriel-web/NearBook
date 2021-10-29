@@ -6,6 +6,8 @@
         "createPost": "createPost",
         "getMyPosts": "getMyPosts",
         "handlePostLike": "handlePostLike",
-        "removePost": "removePost"
+        "removePost": "removePost",
+        "removeComment": "removeComment",
+        "addComment": "createComment"
     }
 }

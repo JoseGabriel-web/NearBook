@@ -1,4 +1,5 @@
 import { context } from 'near-sdk-as'
+import Comment from './Comment'
 
 
 @nearBindgen
@@ -8,6 +9,7 @@ class Post {
   title: string;
   likes: string[];
   description: string;
+  comments: Comment[]  
 
   constructor(creator: string, title: string, description: string) {
     this.id = `${creator}:${context.blockTimestamp}`;
@@ -15,6 +17,7 @@ class Post {
     this.title = title;
     this.description = description;
     this.likes = [];
+    this.comments = [];
   }
 }
 

@@ -29,7 +29,7 @@ const Feed = ({ accountID, wallet }) => {
     <div className="feed">
       <div className="posts-container">
         {posts?
-          posts.map(({ id, creator, title, description, likes }) => (
+          posts.map(({ id, creator, title, description, likes, comments }) => (
             <Post
               accountID={accountID}
               id={id}
@@ -37,6 +37,7 @@ const Feed = ({ accountID, wallet }) => {
               title={title}
               description={description}
               likes={likes}
+              comments={comments}
               wallet={wallet}
             />
           )) : <Loader />}
