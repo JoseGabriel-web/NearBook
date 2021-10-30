@@ -38,7 +38,7 @@ Configura tu near-cli para autorizar tu cuenta de prueba creada recientemente:
 ```
 
 ```html
-    cd beyondNearContract
+    cd NearBook
 ```
 
 # :hammer_and_wrench: Build del proyecto y despliegue en development mode.

@@ -16,8 +16,8 @@ const Post = ({
   likes,
   comments,
   wallet,
-}) => {  
-  const [setCommentLabel, commentLabel] = useState("");
+}) => {
+  const [commentLabel, setCommentLabel] = useState("");
 
   const handleAddComment = async () => {
     if (commentLabel.length > 0) {
@@ -102,7 +102,7 @@ const Post = ({
         </div>
       </div>
       <div
-        data-has-comments={comments.length > 0}
+        data-has-comments={comments && comments?.length > 0}
         className="post-comments-section"
       >
         {comments.length > 0 &&

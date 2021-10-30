@@ -9,6 +9,8 @@ export function greet(): string {
 }
 
 export function createPost(title: string, description: string): string {
+  assert(title.length > 0, "Title field can not be empty.");
+  assert(description.length > 0, "Description field can not be empty.");
   const newPost = new Post(Context.sender, title, description);
   postssssss.push(newPost);
   return "Post created succesfully";

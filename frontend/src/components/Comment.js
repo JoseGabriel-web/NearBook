@@ -6,7 +6,7 @@ import Trash from "../assets/Trash";
 const Comment = ({
   wallet,
   accountID,
-  commentID,
+  id: commentID,
   creator,
   label,
   postID,
