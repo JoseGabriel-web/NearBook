@@ -56,3 +56,49 @@ Hacer el build y deployment en development mode.
 ```html
     yarn start:app
 ```
+
+# Comandos:
+
+
+
+## Comando para crear un Post:
+
+```html
+    near call $CONTRATO createPost '{"title": "string", "description": "string"}' --account-id <id>.testnet
+```
+
+## Comando para crear un Comentario:
+
+```html
+    near call $CONTRATO createComment '{"label": "string", "postID": "string"}' --account-id <id>.testnet
+```
+
+## Comando para conseguir lista de Posts:
+
+```html
+    near view $CONTRATO listPosts
+```
+
+## Comando para conseguir lista de Post creados:
+
+```html
+    near call $CONTRATO getMyPosts --account-id <id>.testnet
+```
+
+## Comando para eliminar un comentario:
+
+```html
+    near call $CONTRATO removeComment '{"postID": "string", "commentID": "string"}' --account-id <id>.testnet
+```
+
+## Comando para quitar/dar like a un post:
+
+```html
+    near call $CONTRATO handlePostLike '{"postID": "string"}' --account-id <id>.testnet
+```
+
+## Comando para eliminar un Post:
+
+```html
+    near call $CONTRATO removePost '{"postID": "string"}' --account-id <id>.testnet
+```
