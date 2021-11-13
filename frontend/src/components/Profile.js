@@ -7,7 +7,7 @@ import Post from "./Post";
 
 const Profile = ({ accountID, wallet }) => {
   const history = useHistory();
-  const [posts, setPosts] = useState()
+  const [posts, setPosts] = useState([])
 
   useEffect(() => {
     if (!accountID) {
