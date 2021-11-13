@@ -80,7 +80,7 @@ const Post = ({
               <Unliked tooltip={likes} />
             )}
           </div>
-          <div className="post-footer-like-quantity">{likes.length}</div>
+          <div className="post-footer-like-quantity">{likes && likes.length}</div>
           <div className="spacer" />
           <div className="post-footer-comments-emoji-and-quantity">
             <div className="post-footer-comments-quantity">
@@ -105,7 +105,7 @@ const Post = ({
         data-has-comments={comments && comments?.length > 0}
         className="post-comments-section"
       >
-        {comments.length > 0 &&
+        {comments && comments.length > 0 &&
           comments.map(({ commentID, creator, label }) => (
             <Comment
               wallet={wallet}
