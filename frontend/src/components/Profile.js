@@ -31,7 +31,7 @@ const Profile = ({ accountID, wallet }) => {
         <div className="profile-picture">
           {accountID && accountID.split("")[0].toUpperCase()}
         </div>
-        <div className="profile-posts-quantity">{posts && posts.length} Posts</div>
+        <div className="profile-posts-quantity">{posts && posts.length? posts.length : 0} Posts</div>
       </div>
       <div className="profile-posts">
       {posts?
